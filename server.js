@@ -38,18 +38,20 @@ router.get('/api/v1/questions/:id', (req, res)=>{
 
 router.get('/api/v1/questions/:questionid/answers', (req, res)=>{
 	if(req.params.questionid){
-		let qindex = qns.findIndex((x)=>x.id === req.params.questionid);
-		
-		let index = users.findIndex((x)=>x.id === qns[qindex].userid);
+		let result = [];
 		let _ans = ans.filter(x=>x.questionid === req.params.questionid);
-		let result = [{
-			title: qns[qindex].title || '',
-			question: qns[qindex].body || '',
-			date: qns[qindex].date || '',
-			time: qns[qindex].time || '',
-			user: users[index].name || '',
-			answers: _ans
-		}];
+		if(_ans.length > 0){
+			let qindex = qns.findIndex((x)=>x.id === req.params.questionid);
+			let index = users.findIndex((x)=>x.id === qns[qindex].userid);
+			result.push({
+				title: valueOrEmpty(qns[qindex].title),
+				question: valueOrEmpty(qns[qindex].body),
+				date: valueOrEmpty(qns[qindex].date),
+				time: valueOrEmpty(qns[qindex].time),
+				user: valueOrEmpty(users[index].name),
+				answers: _ans
+			});
+		}
 		res.json(result);
 	}else{
 		res.json(500, {error: 'There was an error!'});
@@ -57,6 +59,9 @@ router.get('/api/v1/questions/:questionid/answers', (req, res)=>{
 	
 });
 
+function valueOrEmpty(value, empty = ''){
+	return value || empty;
+}
 
 router.post('/api/v1/questions', (req, res)=>{
 	if(req.body.id && req.body.title && req.body.body && req.body.date && req.body.time && req.body.userid){
@@ -88,8 +93,8 @@ router.put('/api/v1/questions/:id', (req, res)=>{
 	if(req.params.id && (req.body.title || req.body.body)){
 		let index = qns.findIndex((x)=>x.id === req.params.id);
 		if(index > -1){
-			qns[index].title = req.body.title || qns[index].title;
-			qns[index].body = req.body.body || qns[index].body;
+			qns[index].title = valueOrEmpty(req.body.title, qns[index].title);
+			qns[index].body = valueOrEmpty(req.body.body, qns[index].body);
 		}
 		res.json(qns);
 	}else{
