@@ -1,0 +1,23 @@
+{
+  "name": "restapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo error no test specified && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "API",
+    "RESTful"
+  ],
+  "author": "Onuorah Ugochukwu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0"
+  }
+}

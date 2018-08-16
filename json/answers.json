@@ -1,0 +1,26 @@
+[
+	{
+		"id":"1",
+		"userid":"2",
+		"questionid":"2",
+		"body":"This is the body of the first answer to second question",
+		"date":"2018/08/07",
+		"time":"15:15"
+	},
+	{
+		"id":"2",
+		"userid":"1",
+		"questionid":"1",
+		"body":"This is the body of the second answer to first question",
+		"date":"2018/08/06",
+		"time":"15:35"
+	},
+	{
+		"id":"3",
+		"userid":"3",
+		"questionid":"2",
+		"body":"This is the body of the third answer to second question",
+		"date":"2018/08/07",
+		"time":"19:15"
+	}
+]
